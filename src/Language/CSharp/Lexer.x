@@ -70,6 +70,12 @@ $real_suffix   = [FfDdMm]
 
 @verbatim_string_literal = \@\" (([.\n] # \") | \"\")* \"
 
+--------------------------------------------------------------------------------
+-- Pragma literals.
+--------------------------------------------------------------------------------
+@pragma         = "#if" | "#else" | "#elif" | "#endif" | "#define" | "#undef" | "#warning" | "#error" |
+                  "#line" | "#region".* | "#endregion" | "#pragma"
+
 tokens :-
     @verbatim_string_literal 
         { \ p x -> Positioned p (TVerbatimStringLiteral (tail (tail (init x)))) }
@@ -78,6 +84,7 @@ tokens :-
 
     $white+     ;
     @comment    ;
+    @pragma     ;
 
     "abstract"          { \ p _ -> Positioned p TKWabstract     }
     "as"                { \ p _ -> Positioned p TKWas           }
