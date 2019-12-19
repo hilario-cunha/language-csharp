@@ -17,6 +17,7 @@ module Language.CSharp.Pretty(
 import Text.PrettyPrint
 import Data.List
 import Language.CSharp.Syntax
+import Prelude hiding ((<>))
 
 -- | Pretty printing type class.
 class Pretty a where
